@@ -1,0 +1,36 @@
+The battleship game
+A 20x20 board. Containing Y battleships (positioned horizontally and vertically).
+Read – Read response to a certain move by the player.
+For example: Miss (m), Hit (h), Sunk (s), Victory (v) when game is done.
+An error is being returned on out of bound attempt / attempt to hit an already hit spot
+(Should think what error exactly).
+
+Write – A move submission. Committed in following format: x y (being the x,y coordinates).
+Isn`t affected by file position. Every write that hasn`t finished with an error writes the result
+to an inner data structure which can be read with read.
+
+Ioctl can mean board re-creation with different parameters, can receive as an argument -
+a number (indicating board size) or something else (for example -1 for a hint), and also number of
+ships. Will return error for board size greater than 30, or if it isn`t a number or a negative
+number. Same goes for ships number – starting from 0 an error is returned.
+
+Lseek – just allows the player to see the results of his previous actions.
+Maybe upon init, it is automatically allocated to a board of size 20x20 and 5 ships.
+Open moves file position to end! (Because file position enables to read the following move).
+Module isn`t persistent. But open and close don`t change it`s internal state (meaning – the game continues).
+
+Scenarios test wise:
+
+Read:
+Reading negative, reading more bytes than moves, reading letters, reading into illegal buffer, *need one more*
+
+Write:
+writing illegal x coordinate (out of bounds), illegal y (out of bounds), writing illegal x (not number), writing illegal y(not number), not writing y.
+
+Lseek:
+?
+
+IOCTL:
+Board size greater than something (for example 40), too much ships (for example 15),
+illegal value for size (not number), illegal value for ships (not number), negative numbers
+or zero in each (2 tests maybe?)

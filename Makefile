@@ -2,7 +2,7 @@ COMPILER := clang
 COMPILER_FLAGS := -std=c99 -Wextra -Wpedantic
 SRCS := test.c
 OBJS=$(subst .c,.o,$(SRCS))
-BIN = macro
+BIN = test
 
 $(BIN): $(OBJS)
 	$(COMPILER) $(COMPILER_FLAGS) $^ -o $@
